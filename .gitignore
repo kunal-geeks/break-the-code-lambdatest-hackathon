@@ -1,19 +1,36 @@
-# Maven
-/target/
+# IDEs and editors
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.project
+.classpath
+.settings/
 
-# Compiled class file
-*.class
+# Mac system files
+.DS_Store
 
-# Log file
+# Logs
+logs/
 *.log
 
-# BlueJ files
-*.ctxt
+# Maven build directory
+/target/
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Allure and Extent reports
+allure-results/
+allure-report/
+extent-reports/
 
-# Package Files #
+# OS crash logs
+hs_err_pid*
+replay_pid*
+
+# Java class files
+*.class
+
+# Archive files
 *.jar
 *.war
 *.nar
@@ -22,6 +39,11 @@
 *.tar.gz
 *.rar
 
-# Virtual machine crash logs
-hs_err_pid*
-replay_pid*
+# Generated screenshots (optional for UI testing)
+screenshots/
+
+# Custom test output (optional for test result dumping)
+test-output/
+
+# Ignore sensitive config files if any (optional)
+config/*.local.*
