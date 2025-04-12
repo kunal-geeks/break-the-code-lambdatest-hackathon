@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="LambdaTest Hackathon Suite" parallel="tests" thread-count="2">
-    <test name="Web Tests">
+<suite name="LambdaTest Hackathon Suite">
+    <!-- Parameters for browser, version, and platform -->
+    <parameter name="browser" value="chrome"/>
+    <parameter name="version" value="latest"/>
+    <parameter name="platform" value="Windows 10"/>
+
+    <!-- Test suite configuration -->
+    <test name="LambdaTest Test">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="version" value="latest"/>
+        <parameter name="platform" value="Windows 10"/>
+
+        <!-- Test classes -->
         <classes>
-            <class name="tests.BaseTest"/>
+            <!-- Replace 'your.package.TestClass' with actual test class names -->
+            <class name="tests.LambdaTestTest"/>
+            <!-- Add more test classes as required -->
         </classes>
     </test>
 </suite>
