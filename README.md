@@ -54,25 +54,27 @@ break-the-code/
 ├── README.md
 ```
 
-## 🚀 How to Run
+# 🚀 How to Run
+
+## ▶️ Run with Environment, Report & Browser Options
 
 ```bash
 
-# Run with ExtentReports
-mvn clean test -Dreport=extent
+# Run on prod with Allure report on LambdaTest grid
+mvn clean test -Dsuite=testng.xml -Denv=prod -Dreport=allure -Dbrowser=lambdatest
+
+# Run locally on Chrome with Extent report
+mvn clean test -Dsuite=testng.xml -Denv=stage -Dreport=extent -Dbrowser=chrome
+
+# Run locally on Firefox with both reports
+mvn clean test -Dsuite=testng.xml -Denv=qa -Dreport=both -Dbrowser=firefox
 ```
 
-# Run with Allure Reports
+#$ ▶️ Open Allure Report
 ```basg
-mvn clean test -Dreport=allure
+allure serve allure-results
 ```
-```bash
-mvn allure:serve
-```
-# Run in QA/Stage/Prod environment
-```bash
-mvn clean test -Denv=qa
-```
+
 ## ☁️ LambdaTest Integration
 
 - Remote execution on LambdaTest Grid
