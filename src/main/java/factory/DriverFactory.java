@@ -1,13 +1,16 @@
-package driver;
+package factory;
 
+import config.LambdaTestConfig;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import config.LambdaTestConfig;
+import utils.ConfigManager;
+
 import java.net.URL;
 import java.util.logging.Logger;
 
@@ -19,13 +22,19 @@ public class DriverFactory {
     /**
      * Get WebDriver instance for a given browser, version, and platform.
      * 
-     * @param browser the name of the browser to use (e.g., chrome, firefox, lambdatest)
-     * @param version the version of the browser (for LambdaTest compatibility)
-     * @param platform the platform to run the browser on (for LambdaTest compatibility)
+     * @param browser   the name of the browser to use (e.g., chrome, firefox, lambdatest)
+     * @param version   the version of the browser (for LambdaTest compatibility)
+     * @param platform  the platform to run the browser on (for LambdaTest compatibility)
+     * @param headless  whether to run the browser in headless mode
      * @return WebDriver instance
      */
     public static WebDriver getDriver(String browser, String version, String platform, boolean headless) {
         if (driver.get() == null) {
+            browser = browser != null ? browser : ConfigManager.getBrowser();
+            version = version != null ? version : ConfigManager.getVersion();
+            platform = platform != null ? platform : ConfigManager.getPlatform();
+            headless = ConfigManager.isHeadless();
+
             switch (browser.toLowerCase()) {
                 case "chrome":
                     driver.set(initializeChromeDriver(headless));
@@ -34,7 +43,9 @@ public class DriverFactory {
                     driver.set(initializeFirefoxDriver(headless));
                     break;
                 case "lambdatest":
-                    driver.set(initializeLambdaTestDriver(browser, version, platform));
+                    // Actual browser to test on LambdaTest (e.g., chrome, firefox)
+                    String realBrowser = ConfigManager.get("lt.browser", "chrome");
+                    driver.set(initializeLambdaTestDriver(realBrowser, version, platform));
                     break;
                 default:
                     throw new IllegalArgumentException("Unsupported browser: " + browser);
@@ -44,30 +55,26 @@ public class DriverFactory {
     }
 
     /**
-     * Initialize ChromeDriver with options, including headless if specified.
-     * 
-     * @param headless whether to run the browser in headless mode
-     * @return a new ChromeDriver instance
+     * Initialize ChromeDriver with WebDriverManager and headless option.
      */
     private static WebDriver initializeChromeDriver(boolean headless) {
+        WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         if (headless) {
-            options.addArguments("--headless");  // Run headlessly
+            options.addArguments("--headless=new"); // Modern headless mode
         }
         logger.info("Initializing ChromeDriver with headless=" + headless);
         return new ChromeDriver(options);
     }
 
     /**
-     * Initialize FirefoxDriver with options, including headless if specified.
-     * 
-     * @param headless whether to run the browser in headless mode
-     * @return a new FirefoxDriver instance
+     * Initialize FirefoxDriver with WebDriverManager and headless option.
      */
     private static WebDriver initializeFirefoxDriver(boolean headless) {
+        WebDriverManager.firefoxdriver().setup();
         FirefoxOptions options = new FirefoxOptions();
         if (headless) {
-            options.addArguments("-headless");  // Run headlessly
+            options.addArguments("-headless");
         }
         logger.info("Initializing FirefoxDriver with headless=" + headless);
         return new FirefoxDriver(options);
@@ -75,25 +82,24 @@ public class DriverFactory {
 
     /**
      * Initialize the LambdaTest WebDriver with desired capabilities.
-     * 
-     * @param browser the browser name for LambdaTest
-     * @param version the version of the browser for LambdaTest
-     * @param platform the platform for LambdaTest
-     * @return a new RemoteWebDriver instance connected to LambdaTest
      */
-    private static WebDriver initializeLambdaTestDriver(String browser, String version, String platform) {
+    public static WebDriver initializeLambdaTestDriver(String browser, String version, String platform) {
         try {
-            DesiredCapabilities capabilities = LambdaTestConfig.getCapabilities(browser, version, platform);
-            logger.info("Initializing LambdaTest driver with browser=" + browser + ", version=" + version + ", platform=" + platform);
-            return new RemoteWebDriver(new URL(LambdaTestConfig.GRID_URL), capabilities);
+            DesiredCapabilities caps = LambdaTestConfig.getCapabilities(browser, version, platform);
+
+
+            logger.info("Initializing LambdaTest RemoteWebDriver: browser=" + browser +
+                        ", version=" + version + ", platform=" + platform);
+
+            URL url = new URL(LambdaTestConfig.GRID_URL);
+            return new RemoteWebDriver(url, caps);
         } catch (Exception e) {
-            logger.severe("Failed to initialize LambdaTest driver: " + e.getMessage());
-            throw new RuntimeException("LambdaTest driver initialization failed", e);
+            throw new RuntimeException("Failed to initialize LambdaTest WebDriver: " + e.getMessage(), e);
         }
     }
 
     /**
-     * Quit the WebDriver and clean up.
+     * Quit and clean up the WebDriver.
      */
     public static void quitDriver() {
         if (driver.get() != null) {

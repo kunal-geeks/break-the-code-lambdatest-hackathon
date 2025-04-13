@@ -1,0 +1,16 @@
+[
+  {
+    "type": "alert",
+    "expectedText": "You successfully clicked an alert"
+  },
+  {
+    "type": "confirm",
+    "accept": true,
+    "expectedText": "You clicked: Ok"
+  },
+  {
+    "type": "prompt",
+    "inputText": "Hello World!",
+    "expectedText": "You entered: Hello World!"
+  }
+]

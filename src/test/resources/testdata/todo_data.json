@@ -1,0 +1,39 @@
+[
+  {
+    "initialCheckboxes": [
+      "li1",
+      "li2",
+      "li3",
+      "li4"
+    ],
+    "newItems": [
+      "List Item 6",
+      "List Item 7",
+      "List Item 8"
+    ],
+    "finalItem": "Get Taste of Lambda and Stick to It",
+    "verifyCheckboxes": [
+      "li1",
+      "li3",
+      "li7",
+      "li8",
+      "li9"
+    ]
+  },
+  {
+    "initialCheckboxes": [
+      "li1",
+      "li2"
+    ],
+    "newItems": [
+      "Write Tests",
+      "Review Code"
+    ],
+    "finalItem": "Push Code to Repo",
+    "verifyCheckboxes": [
+      "li2",
+      "li6",
+      "li7"
+    ]
+  }
+]

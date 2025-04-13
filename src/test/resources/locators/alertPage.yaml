@@ -1,0 +1,15 @@
+jsAlertBtn:
+  type: xpath
+  value: //button[text()='Click for JS Alert']
+
+jsConfirmBtn:
+  type: xpath
+  value: //button[text()='Click for JS Confirm']
+
+jsPromptBtn:
+  type: xpath
+  value: //button[text()='Click for JS Prompt']
+
+resultText:
+  type: id
+  value: result

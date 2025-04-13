@@ -1,0 +1,19 @@
+usernameInput:
+  type: id
+  value: username
+
+passwordInput:
+  type: id
+  value: password
+
+loginButton:
+  type: css
+  value: button[type='submit']
+
+successMessage:
+  type: css
+  value: .flash.success
+
+errorMessage:
+  type: css
+  value: .flash.error
