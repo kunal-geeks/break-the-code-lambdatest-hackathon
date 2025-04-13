@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/github/actions/workflow/status/kunal-geeks/break-the-code-lambdatest-hackathon/test.yml?label=CI%20Build&logo=github&style=for-the-badge" />
   <img src="https://img.shields.io/badge/Java-11-blue?style=for-the-badge&logo=java" />
-  <img src="https://img.shields.io/badge/TestNG-7.9-orange?style=for-the-badge&logo=testng" />
+  <img src="https://img.shields.io/badge/TestNG-7.7-orange?style=for-the-badge&logo=testng" />
   <img src="https://img.shields.io/github/license/kunal-geeks/break-the-code-lambdatest-hackathon?style=for-the-badge" />
 </p>
 
