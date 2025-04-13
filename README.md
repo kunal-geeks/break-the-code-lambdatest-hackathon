@@ -60,13 +60,22 @@ break-the-code/
 
 ```bash
 
-# Run on prod with Allure report on LambdaTest grid
+# Clone the repository
+git clone https://github.com/kunal-geeks/break-the-code-lambdatest-hackathon.git && cd break-the-code-lambdatest-hackathon
+
+# Edit the config.properties file to add LambdaTest credentials
+echo "Please edit config.properties to add your LambdaTest credentials (lt.username and lt.accessKey)"
+
+# Install dependencies
+mvn clean install
+
+# Run on LambdaTest grid with Allure report (Production environment)
 mvn clean test -Dsuite=testng.xml -Denv=prod -Dreport=allure -Dbrowser=lambdatest
 
-# Run locally on Chrome with Extent report
+# Run locally on Chrome with Extent report (Staging environment)
 mvn clean test -Dsuite=testng.xml -Denv=stage -Dreport=extent -Dbrowser=chrome
 
-# Run locally on Firefox with both reports
+# Run locally on Firefox with both Allure and Extent reports (QA environment)
 mvn clean test -Dsuite=testng.xml -Denv=qa -Dreport=both -Dbrowser=firefox
 ```
 
