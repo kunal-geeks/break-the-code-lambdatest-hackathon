@@ -28,8 +28,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Run Tests with Maven (Allure & Extent Supported)
-        run: mvn clean test -Dsuite=testng.xml -Denv=prod -Dreport=allure -Dbrowser=lambdatest
+      - name: Run Tests with Maven
+        run: mvn clean test -Dbrowser=lambdatest -Dlt.username=${{ secrets.LT_USERNAME }} -Dlt.accessKey=${{ secrets.LT_ACCESS_KEY }} -Dsuite=testng.xml -Denv=prod
 
       - name: Generate Allure Report
         run: |
