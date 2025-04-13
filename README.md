@@ -1,107 +1,133 @@
-### break-the-code-lambdatest-hackathon
-🧪 Automation test suite for the LambdaTest "Break the Code" QA Hackathon — includes login validation and JavaScript alert handling using Java, TestNG, Selenium Grid, and LambdaTest integration. Features robust framework setup, parallel execution, reporting, logging, and secure credential handling.
+<h1 align="center">🧪 Break the Code - LambdaTest Hackathon Project</h1>
 
+<p align="center">
+  <img src="https://img.shields.io/github/actions/workflow/status/kunal-geeks/break-the-code-lambdatest-hackathon/test.yml?label=CI%20Build&logo=github&style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Java-11-blue?style=for-the-badge&logo=java" />
+  <img src="https://img.shields.io/badge/TestNG-7.9-orange?style=for-the-badge&logo=testng" />
+  <img src="https://img.shields.io/github/license/kunal-geeks/break-the-code-lambdatest-hackathon?style=for-the-badge" />
+</p>
 
-# QA Hackathon Automation Challenge (Java)
+<p align="center">
+  <b>Automation suite for the <a href="https://www.lambdatest.com/">LambdaTest "Break the Code" QA Hackathon</a></b><br>
+  Java + Selenium + TestNG with LambdaTest, CI/CD, parallel execution, reporting, and logging.
+</p>
 
-## 💼 Tech Stack
-- Selenium + TestNG
-- Page Object Model
-- Log4j2 Logging
-- ExtentReports / Allure Reports (toggle via config)
-- Retry Logic
-- LambdaTest Integration
-- GitHub Actions CI
+---
 
-## 🚀 How to Run
+## 🔧 Tech Stack
+
+- ⚙️ **Test Framework:** TestNG
+- 🧱 **Design Pattern:** Page Object Model (POM)
+- 🌐 **Grid Provider:** LambdaTest (Cross-browser Testing)
+- 📊 **Reports:** Allure / ExtentReports (Dynamic switch)
+- 📦 **Logging:** Log4j2 (Daily rolling, environment-based)
+- 🔄 **Retry Mechanism:** Custom RetryAnalyzer
+- ☁️ **CI/CD:** GitHub Actions
+- 🔑 **Secrets Handling:** ConfigManager with Env Overrides
+
+---
+
+## 📁 Project Structure
 
 ```bash
-# Run locally with ExtentReports
-mvn clean test -Dreport=extent
-
-# Run locally with Allure Reports
-mvn clean test -Dreport=allure
-mvn allure:serve
-```
-```
 break-the-code/
 ├── .github/workflows/test.yml
-├── logs/                        # Logs directory (ignored in .gitignore)
-├── reports/                     # ExtentReports output
+├── logs/                         # Log4j2 logs
+├── reports/                      # ExtentReports output
 ├── src/
 │   ├── main/java/
-│   │   ├── base/                # BaseTest.java
-│   │   ├── config/              # ConfigReader.java
-│   │   ├── factory/             # DriverFactory.java
-│   │   ├── pages/               # POM classes
-│   │   ├── utils/               # RetryAnalyzer, LoggerUtil
-│   │   └── reports/             # ReportManager.java
-│   └── test/java/tests/         # LoginTest.java, AlertsTest.java
+│   │   ├── base/                 # BaseTest setup
+│   │   ├── config/               # ConfigManager
+│   │   ├── factory/              # DriverFactory
+│   │   ├── pages/                # Page Objects
+│   │   ├── reports/              # ReportManager
+│   │   └── utils/                # RetryAnalyzer, LoggerUtil
+│   └── test/java/tests/          # LoginTest, AlertsTest
 ├── resources/
-│   ├── config.properties
-│   ├── log4j2.xml
+│   ├── config.properties         # Base config
+│   ├── config.qa.properties      # QA overrides
+│   ├── config.stage.properties   # Stage overrides
+│   ├── log4j2.xml                # Logging config
 ├── testng.xml
 ├── pom.xml
 ├── .gitignore
 ├── README.md
-
 ```
 
+## 🚀 How to Run
+
+```bash
+
+# Run with ExtentReports
+mvn clean test -Dreport=extent
 ```
-✅ 1. Unit Test Class for ConfigManager
-We'll add a ConfigManagerTest under src/test/java to verify property loading, environment overrides, and fallbacks.
 
-✅ 2. Dynamic Environment Support in testng.xml
-We’ll update the XML to read the environment dynamically using Java system properties, allowing runtime switching via:
-
-bash
-Copy
-Edit
-mvn clean test -Denv=stage
-🔜 Next Framework Enhancements
-📘 Logging (Advanced)
-Integrate and configure Log4j2 for:
-
-File & console logging
-
-Environment-specific log levels
-
-Rolling logs per day
-
-📊 Advanced Test Data Strategy
-Add a test data manager:
-
-Load data from JSON, YAML, or Excel
-
-Support parameterized tests using TestNG @DataProvider
-
-🔄 CI/CD Pipeline via GitHub Actions
-Trigger on:
-
-Push to main
-
-Pull Request to main
-
-Jobs:
-
-Checkout + Setup JDK
-
-Cache dependencies
-
-Run tests
-
-Generate Allure/Extent Reports as artifacts
-
-(Optional) Slack/Gmail/Teams notifications
-
-
-✅ Bonus: Run a Specific Class or Group from Command Line (Optional)
-Specific class:
-
-mvn clean test -Dtest=YourTestClass
-
-TestNG group:
-
-mvn clean test -Dgroups="smoke"
+# Run with Allure Reports
+```basg
+mvn clean test -Dreport=allure
 ```
+```bash
+mvn allure:serve
+```
+# Run in QA/Stage/Prod environment
+```bash
+mvn clean test -Denv=qa
+```
+## ☁️ LambdaTest Integration
+
+- Remote execution on LambdaTest Grid
+
+- Secure credentials via System.getenv()
+
+- Auto capability handling from DriverFactory
+
+## 🆔 LambdaTest Test IDs
+```bash
+
+TWRUR-4JSDX-FSGSK-UUFZW
+PNPZX-PXYM2-LXY29-JEGFO
+UENNU-XSJ6C-KBGNS-FECY4
+AKEXE-8SJOQ-43FZI-R7V67
+KEJPK-XSHDA-QTY5O-DUJZL
+HWURA-YPSDT-YBIYO-RXCAV
+R8D2X-FPR92-2VMMP-W1QQF
+BCPBS-E8HTY-AYIKT-X4UPH
+ANZHK-FJGYQ-DN68Q-ZKDSJ
+GV3XV-WVHLY-AXLFY-QEY3U
+P2KTH-JJ8GM-QTQMH-FA4WE
+```
+
+## 🔄 GitHub Actions CI
+
+- Trigger: Push or PR to main
+
+Steps:
+
+- JDK setup & dependency caching
+
+- Maven test execution
+
+- Allure/Extent report generation
+
+- Report uploaded as artifact
+
+## ✅ Features
+
+- Login form tests
+
+- JavaScript alert validation
+
+- Parallel execution
+
+- Configurable reporting
+
+- Robust logging
+
+- Cross-browser testing on LambdaTest
+
+🧑‍💻 Author
+Kunal Sharma
+
+✉️ kunal.sdet001@gmail.com
+
 
