@@ -70,13 +70,13 @@ echo "Please edit config.properties to add your LambdaTest credentials (lt.usern
 mvn clean install
 
 # Run on LambdaTest grid with Allure report (Production environment)
-mvn clean test -Dsuite=testng.xml -Denv=prod -Dreport=allure -Dbrowser=lambdatest
+mvn clean test -Dsuite=testng.xml -Denv=prod -Dreport_type=allure -Dbrowser=lambdatest
 
 # Run locally on Chrome with Extent report (Staging environment)
-mvn clean test -Dsuite=testng.xml -Denv=stage -Dreport=extent -Dbrowser=chrome
+mvn clean test -Dsuite=testng.xml -Denv=stage -Dreport_type=extent -Dbrowser=chrome
 
 # Run locally on Firefox with both Allure and Extent reports (QA environment)
-mvn clean test -Dsuite=testng.xml -Denv=qa -Dreport=both -Dbrowser=firefox
+mvn clean test -Dsuite=testng.xml -Denv=qa -Dreport_type=both -Dbrowser=firefox
 ```
 
 #$ ▶️ Open Allure Report
