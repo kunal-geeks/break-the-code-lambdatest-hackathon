@@ -2,6 +2,8 @@ package factory;
 
 import config.LambdaTestConfig;
 import io.github.bonigarcia.wdm.WebDriverManager;
+
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -10,14 +12,14 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import utils.ConfigManager;
+import utils.LoggerUtil;
 
 import java.net.URL;
-import java.util.logging.Logger;
 
 public class DriverFactory {
 
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-    private static final Logger logger = Logger.getLogger(DriverFactory.class.getName());
+    private static final Logger logger = LoggerUtil.getLogger(DriverFactory.class);
 
     /**
      * Get WebDriver instance for a given browser, version, and platform.
